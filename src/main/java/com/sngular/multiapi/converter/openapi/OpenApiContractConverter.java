@@ -11,7 +11,6 @@ import com.sngular.multiapi.converter.exception.MultiApiContractConverterExcepti
 import com.sngular.multiapi.converter.openapi.model.ConverterPathItem;
 import com.sngular.multiapi.converter.openapi.model.OperationType;
 import com.sngular.multiapi.converter.utils.BasicTypeConstants;
-import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
@@ -19,6 +18,7 @@ import io.swagger.v3.oas.models.examples.Example;
 import io.swagger.v3.oas.models.media.*;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.responses.ApiResponse;
+import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.core.models.ParseOptions;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
 import io.swagger.v3.parser.exception.ReadContentException;
@@ -915,7 +915,7 @@ public final class OpenApiContractConverter {
     final ParseOptions options = new ParseOptions();
     options.setResolve(true);
     try {
-      final SwaggerParseResult result = new OpenAPIParser().readLocation(file.getPath(), null, options);
+      final SwaggerParseResult result = new OpenAPIV3Parser().readLocation(file.getPath(), null, options);
       openAPI = result.getOpenAPI();
     } catch (final ReadContentException e) {
       throw new MultiApiContractConverterException("Code generation failed when parser the .yaml file ");
