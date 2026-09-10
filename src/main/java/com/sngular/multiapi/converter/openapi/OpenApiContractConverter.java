@@ -803,7 +803,8 @@ public final class OpenApiContractConverter {
     final BodyMatchers matcher = new BodyMatchers();
     if (Objects.nonNull(schema) && Objects.nonNull(schema.getProperties())) {
       final Map<String, Object> bodyMap = new HashMap<>();
-      for (Entry<String, Schema> property : schema.getProperties().entrySet()) {
+      final Map<String, Schema> properties = schema.getProperties();
+      for (Entry<String, Schema> property : properties.entrySet()) {
         final var result = writeBodyMatcher(property, objectName + "." + property.getKey(), property.getValue(), property.getValue().getType());
         bodyMap.put(property.getKey(), result.getLeft());
         matcher.matchers().addAll(result.getRight().matchers());
